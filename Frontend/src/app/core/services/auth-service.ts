@@ -2,12 +2,13 @@ import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, switchMap, tap } from 'rxjs';
 import { LoginUser, RegisterUser, User } from '../../models/user.model';
+import { environment } from '../../environment/enviroment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  private apiUrl = 'http://localhost:3000';
+  private apiUrl =  environment.apiUrl;
   private http = inject(HttpClient);
 
   private currentUser = new BehaviorSubject<any>(this.getUser());
