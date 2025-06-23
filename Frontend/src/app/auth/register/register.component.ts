@@ -32,7 +32,7 @@ export class RegisterComponent {
     };
     this.authService.register(user).subscribe({
       next: (res) => {
-        this.router.navigate(['dashboard']);
+        this.router.navigate(['dashboard/weather']);
       },
       error: (error) => {
         console.log(error);
