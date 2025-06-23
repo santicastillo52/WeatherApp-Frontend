@@ -1,0 +1,61 @@
+<section class="login">
+  <div class="login-container">
+    <header class="header">
+      <h3>Login</h3>
+    </header>
+    <!-- ver video xacademy template estado y validación minuto 13:50 estilos-->
+    <form #loginForm="ngForm" class="form" (ngSubmit)="submitForm()">
+      <div class="form-field">
+        <label for="email">Email</label>
+        <input
+          #email="ngModel"
+          type="email"
+          id="email"
+          name="email"
+          class="form-control"
+          [(ngModel)]="formModel.email"
+          required
+          email
+        />
+        <div class="input-error">
+          @if(email.hasError('email')){
+          <span> El email no tiene un formato valido. </span>
+          }
+        </div>
+      </div>
+      <div class="form-field">
+        <label for="password">Contraseña</label>
+        <input
+         #password="ngModel"
+          type="password"
+          id="password"
+          name="password"
+          class="form-control"
+          [(ngModel)]="formModel.password"
+          required
+        />
+      </div>
+      <div class="button-container">
+        <button
+          [disabled]="loginForm.invalid"
+          type="submit"
+          class="form-button"
+        >
+          Inciar Sesión
+        </button>
+      </div>
+      <div class="form-error">
+        @if(errorMessage){
+        <span>
+          Error: "{{ errorMessage }}" Contraseña o usuario incorrecto.
+        </span>
+        }
+      </div>
+    </form>
+    <footer class="footer">
+      <a [routerLink]="'/register'">
+        <p>¿Aún no tienes una cuenta? ¡Regístrate aquí!</p>
+      </a>
+    </footer>
+  </div>
+</section>

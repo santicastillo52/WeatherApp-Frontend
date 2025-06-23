@@ -1,0 +1,23 @@
+<section class="navbar">
+
+
+  <div class="sidebar" >
+    <div (click)="toggleMenu()" class="menu-title">
+      Dashboards
+      <span [class.rotate]="isOpen">▼</span>
+    </div>
+
+    <div class="select-action">
+      @if (isOpen) {
+        <ul class="submenu">
+          <li routerLink="weather" routerLinkActive="active">Weather</li>
+          <li routerLink="users" routerLinkActive="active">Usuarios</li>
+        </ul>
+      }
+    </div>
+
+    <div class="button">
+      <button (click)="logout()" class="logout-button">Cerrar sesión</button>
+    </div>
+  </div>
+</section>

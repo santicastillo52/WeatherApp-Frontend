@@ -1,0 +1,45 @@
+.weather {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  padding: 20px;
+  gap: 20px;
+  box-sizing: border-box;
+  flex-wrap: wrap;
+  justify-content: center;
+  
+}
+
+
+ .left-column {
+  display: flex;
+  flex-direction: column;
+ 
+
+}
+
+
+
+.medium-colum{
+
+  display: flex;
+  flex-direction: column;
+
+
+}
+.right-column {
+  width: 320px; 
+  display: flex;
+  flex-direction: column;
+}
+
+.card {
+  background-color: white;
+  border-radius: 5px;
+  width: 100%;
+  margin: 50px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+  max-width: 100%;
+  box-sizing: border-box;
+   overflow: hidden;
+}

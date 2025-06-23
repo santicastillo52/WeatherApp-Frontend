@@ -1,0 +1,11 @@
+<section class="time-card">
+  <div class="header-container">
+    <header class="time-header">Fecha y Hora</header>
+  </div>
+  @if(weather){
+  <div class="time-container">
+    <p>{{ weather.tz_id }}</p>
+    <p>Hora local: {{ currentTime | date : 'HH:mm:ss' }}</p>
+  </div>
+}
+</section>

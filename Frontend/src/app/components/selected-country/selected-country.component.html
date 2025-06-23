@@ -1,0 +1,18 @@
+<section class="country-card">
+  <div class="header-container">
+    <header class="country-header">Pais Seleccionado</header>
+  </div>
+  <div class="country-container">
+    @if(country.country_name === "estadosUnidos"){
+    <p>Estados Unidos</p>
+    } @else {
+    <p>{{ country.country_name }}</p>
+    }
+
+    <p>Capital: {{ country.country_capital }}</p>
+    <p>Region: {{ country.weather.region }}</p>
+    <p>
+      Latitud: {{ country.weather.lat }} Longitud: {{ country.weather.lon }}
+    </p>
+  </div>
+</section>

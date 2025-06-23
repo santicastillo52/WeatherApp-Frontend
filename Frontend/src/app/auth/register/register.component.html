@@ -1,0 +1,115 @@
+<section class="register">
+  <div class="register-container">
+    <header class="header">
+      <h3>Crear Cuenta</h3>
+    </header>
+    <form #registerForm="ngForm" class="form" (ngSubmit)="submitRegister()">
+      <div class="form-field">
+        <label for="name">Nombre</label>
+        <input
+          #name="ngModel"
+          type="text"
+          id="name"
+          name="name"
+          class="form-control"
+          [(ngModel)]="formModel.name"
+          required
+          minlength="3"
+          maxlength="30"
+        />
+        @if(name.invalid && name.touched){
+        <div class="input-error">
+          <span *ngIf="name.errors?.['required']">El nombre es requerido.</span>
+          <span *ngIf="name.errors?.['minlength']">Mínimo 3 caracteres.</span>
+          <span *ngIf="name.errors?.['maxlength']">Máximo 30 caracteres.</span>
+        </div>
+        }
+      </div>
+      <div class="form-field">
+        <div class="container-password">
+          <div class="password-div">
+            <label for="password">Contraseña</label>
+            <input
+              #password="ngModel"
+              type="password"
+              id="password"
+              name="password"
+              class="form-control"
+              [(ngModel)]="formModel.password"
+              required
+              maxlength="25"
+            />
+          </div>
+          <div class="repeat-password-div">
+            <label for="repeat-password">Repetir Contraseña</label>
+            <input
+              #repeatPassword="ngModel"
+              type="password"
+              id="repeat-password"
+              name="repeat-password"
+              class="form-control"
+              [(ngModel)]="formModel.repeatPassword"
+              required
+            />
+          </div>
+        </div>
+        <div class="input-error">
+          <div
+            *ngIf="passwordsDoNotMatch() && repeatPassword.touched"
+            style="color: red"
+          >
+            Las contraseñas no coinciden.
+          </div>
+          @if(password.invalid && password.touched || repeatPassword.invalid && repeatPassword.touched){
+          <span *ngIf="password.errors?.['required']"
+            >La contraseña es requerida</span
+          >
+          }
+        </div>
+      </div>
+
+      <div class="form-field">
+        <label for="email">Email</label>
+        <input
+          #email="ngModel"
+          type="email"
+          id="email"
+          name="email"
+          class="form-control"
+          [(ngModel)]="formModel.email"
+          required
+          email
+        />
+        @if(email.invalid && email.touched){
+        <div class="input-error">
+          <span *ngIf="email.errors?.['required']">El email es requerido.</span>
+          <span *ngIf="email.errors?.['email']"
+            >Formato de email inválido.</span
+          >
+        </div>
+        }
+      </div>
+      <div class="button-container">
+        <button
+          [disabled]="registerForm.invalid || passwordsDoNotMatch()"
+          type="submit"
+          class="form-button"
+        >
+          Regitrarse
+        </button>
+      </div>
+      <div class="form-error">
+        @if(errorMessage){
+        <span>
+          {{ errorMessage }}
+        </span>
+        }
+      </div>
+    </form>
+    <footer class="footer">
+      <a [routerLink]="'/login'">
+        <p>¿Ya tienes una cuenta? Inicia Sesión</p>
+      </a>
+    </footer>
+  </div>
+</section>

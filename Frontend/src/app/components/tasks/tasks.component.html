@@ -1,0 +1,41 @@
+<section class="tasks-card">
+  <div class="header-container">
+    <header class="tasks-header">Otras tareas</header>
+  </div>
+  <div class="tasks-container">
+    <table class="tasks-table">
+      <thead>
+        <tr>
+          <th>Incompleta</th>
+          <th>Completada</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <!-- Columna tareas NO completadas -->
+          <td>
+            <ul>
+              @for(task of tasks; track task) {
+                @if (!task.completed) {
+                  <li>{{ task.title }}</li>
+                }
+              }
+            </ul>
+          </td>
+
+          <!-- Columna tareas completadas -->
+          <td>
+            <ul>
+              @for(task of tasks; track task) {
+                @if (task.completed) {
+                  <li>{{ task.title }}</li>
+                }
+              }
+            </ul>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+

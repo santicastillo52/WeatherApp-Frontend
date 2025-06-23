@@ -1,0 +1,73 @@
+
+.header-container {
+  width: 100%;
+  background-color: #dcdada;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+}
+
+.tasks-header {
+  font-weight: bold;
+  color: #007bff;
+  font-size: 20px;
+  padding: 15px;
+  text-transform: uppercase;
+}
+
+.tasks-container {
+  align-items: center;
+  gap: 15px;
+  padding: 15px;
+  font-size: 15px;
+}
+
+.tasks-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  background-color: #fefefe;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.1);
+}
+
+.tasks-table th {
+  background-color: #f0f4f8;
+  color: #333;
+  font-weight: 600;
+  padding: 12px;
+  text-align: left;
+  text-transform: uppercase;
+  font-size: 13px;
+  letter-spacing: 0.5px;
+  border-bottom: 1px solid #ddd;
+}
+
+.tasks-table td {
+  padding: 12px;
+  vertical-align: top;
+  background-color: white;
+  font-size: 14px;
+  border-bottom: 1px solid #eee;
+}
+
+.tasks-table ul {
+  list-style: none;
+  padding-left: 0;
+  margin: 0;
+}
+
+.tasks-table li {
+  background-color: #f8f9fa;
+  margin-bottom: 8px;
+  padding: 8px 12px;
+  border-radius: 6px;
+  transition: all 0.2s ease;
+  box-shadow: inset 0 0 0 1px #e0e0e0;
+}
+
+.tasks-table li:hover {
+  background-color: #e9f3ff;
+  box-shadow: inset 0 0 0 1px #007bff;
+  color: #007bff;
+  cursor: default;
+}

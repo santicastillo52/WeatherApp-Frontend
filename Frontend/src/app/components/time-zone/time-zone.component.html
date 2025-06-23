@@ -1,0 +1,11 @@
+<section class="timezones-card">
+  <div class="header-container">
+    <header class="timezones-header">Zonas Horarias Disponibles</header>
+  </div>
+  <div class="timezones-container">
+    @for(time of country.timezones; track time){
+    <p (click)="selectCity(time.key)">{{ time.value }}</p>
+
+    }
+  </div>
+</section>

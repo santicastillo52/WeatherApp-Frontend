@@ -1,0 +1,53 @@
+<section class="users-table">
+  <div class="table-controls">
+    <button class="btn blue" (click)="exportToPDF()">PDF</button>
+    <button class="btn blue" (click)="exportToClipboard()">Copy</button>
+    <button class="btn blue" (click)="exportToExcel()">Excel</button>
+    <button class="btn blue" (click)="printAllUsers()">Imprimir</button>
+    <div class="dropdown">
+      <button class="btn blue">Columnas ▼</button>
+    </div>
+    <div class="dropdown">
+      <button class="btn blue">Mostrar ▼</button>
+    </div>
+    <input
+      type="text"
+      class="filter-input"
+      placeholder="Filtrar:"
+      [(ngModel)]="searchTerm"
+    />
+    <span (click)="searchName()">🔎</span>
+    <span (click)="cancelName()">❌</span>
+  </div>
+
+  <table class="styled-table" id="myTable">
+    <thead>
+      <tr>
+        <th>Nombre</th>
+        <th>Email</th>
+        <th>Fecha Registro</th>
+        <th>Ultimo Login</th>
+      </tr>
+    </thead>
+    <tbody>
+      @for(user of users; track user.id) {
+      <tr>
+        <td>{{ user.name }}</td>
+        <td>{{ user.email }}</td>
+        <td>{{ user.created_at }}</td>
+        <td>{{ user.last_login }}</td>
+      </tr>
+      }
+    </tbody>
+  </table>
+
+  <div class="pagination">
+    <button (click)="prevPage()" [disabled]="currentPage === 1">
+      Anterior
+    </button>
+    <button disabled>{{ currentPage }}</button>
+    <button (click)="nextPage()" [disabled]="currentPage === totalPages">
+      Siguiente
+    </button>
+  </div>
+</section>

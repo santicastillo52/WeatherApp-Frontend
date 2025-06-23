@@ -1,0 +1,17 @@
+<section class="weather-card">
+  <div class="header-container">
+    <header class="city-header">Clima</header>
+  </div>
+
+  <div class="city-container">
+    <img
+      src="{{ country.weather.icon }}"
+      alt="weather icon"
+      class="weather-icon"
+    />
+    <div class="tyc-container">
+      <p>{{ country.weather.condition }} </p>
+      <p>{{ country.weather.temperature }} °C</p>
+    </div>
+  </div>
+</section>
