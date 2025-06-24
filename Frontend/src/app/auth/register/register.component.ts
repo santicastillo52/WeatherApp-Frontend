@@ -16,6 +16,8 @@ export class RegisterComponent {
   private authService = inject(AuthService);
   private router = inject(Router);
   errorMessage: string | null = null;
+  isSubmitting: boolean = false;
+  messageButton: string = 'Registrarse';
 
   formModel: RegisterUser = {
     name: '',
@@ -25,6 +27,9 @@ export class RegisterComponent {
   } as RegisterUser;
 
   submitRegister() {
+    if (this.isSubmitting) return;
+    this.messageButton = 'Registrando...';
+    this.isSubmitting = true;
     const user = {
       name: this.formModel.name,
       password: this.formModel.password,
@@ -37,6 +42,12 @@ export class RegisterComponent {
       error: (error) => {
         console.log(error);
         this.errorMessage = error.error?.message;
+        this.isSubmitting = false;
+        this.messageButton = 'Registrarse';
+      },
+      complete: () => {
+        this.isSubmitting = false;
+        this.messageButton = 'Registrarse';
       },
     });
   }

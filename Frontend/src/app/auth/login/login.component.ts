@@ -17,6 +17,8 @@ export class LoginComponent {
   private authService = inject(AuthService);
   private router = inject(Router);
   errorMessage: string | null = null;
+  isSubmitting: boolean = false;
+  messageButton: string = 'Iniciar sesión';
 
   formModel = {
     email: '',
@@ -24,6 +26,9 @@ export class LoginComponent {
   } as LoginUser;
 
   submitForm() {
+    if(this.isSubmitting) return;
+    this.messageButton = 'Iniciando sesión...';
+    this.isSubmitting = true;
     this.authService.login(this.formModel).subscribe({
       next: (res) => {
         this.router.navigate(['dashboard/weather']);
@@ -31,7 +36,13 @@ export class LoginComponent {
       error: (error) => {
         console.log('ha ocurrido un error', error);
         this.errorMessage = error.error?.message;
+        this.isSubmitting = false;
+        this.messageButton = 'Iniciar sesión';
       },
+      complete:()=>{
+        this.isSubmitting = false;
+        this.messageButton = 'Iniciar sesión';
+      }
     });
   }
 }

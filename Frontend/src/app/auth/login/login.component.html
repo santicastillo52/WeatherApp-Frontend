@@ -37,11 +37,12 @@
       </div>
       <div class="button-container">
         <button
-          [disabled]="loginForm.invalid"
+          [disabled]="loginForm.invalid || isSubmitting" 
+    
           type="submit"
           class="form-button"
         >
-          Iniciar Sesión
+          {{messageButton}}
         </button>
       </div>
       <div class="form-error">

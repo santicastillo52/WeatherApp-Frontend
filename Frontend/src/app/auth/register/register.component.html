@@ -91,11 +91,11 @@
       </div>
       <div class="button-container">
         <button
-          [disabled]="registerForm.invalid || passwordsDoNotMatch()"
+          [disabled]="registerForm.invalid || passwordsDoNotMatch() || isSubmitting"
           type="submit"
           class="form-button"
         >
-          Regitrarse
+          {{messageButton}}
         </button>
       </div>
       <div class="form-error">
