@@ -1,13 +1,14 @@
-import { Component, inject } from '@angular/core';
-import { CountriesComponent } from '../countries/countries.component';
-import { Country } from '../../models/country.model';
+import { Component, inject, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { WeatherService } from '../../core/services/weather.service';
+
+import { CountriesComponent } from '../countries/countries.component';
 import { SelectedCountryComponent } from '../selected-country/selected-country.component';
 import { TimeZoneComponent } from '../time-zone/time-zone.component';
 import { WeatherCityComponent } from '../weather-city/weather-city.component';
 import { TimeComponent } from '../time/time.component';
 import { TasksComponent } from '../tasks/tasks.component';
+import { Country } from '../../models/country.model';
+import { WeatherService } from '../../core/services/weather.service';
 
 @Component({
   selector: 'app-weather',
@@ -23,57 +24,54 @@ import { TasksComponent } from '../tasks/tasks.component';
   templateUrl: './weather.component.html',
   styleUrl: './weather.component.scss',
 })
-export class WeatherComponent {
-  private weatherService = inject(WeatherService);
-  subscription = new Subscription();
+export class WeatherComponent implements OnInit, OnDestroy {
+  private readonly weatherService = inject(WeatherService);
+  private readonly subscription = new Subscription();
+  
   countryData!: Country;
   selectedWeather: any;
   errorMessage: string | null = null;
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.searchCountry('Argentina');
   }
 
-  getWeatherByZone(weather: string) {
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
+  }
+
+  getWeatherByZone(weather: string): void {
     this.searchWeather(weather);
   }
 
-  getCountry(country: string) {
+  getCountry(country: string): void {
     this.searchCountry(country);
   }
-  /* desde este componente debemos pasar al resto de componentes la data asi solo realizamos una llamada al back*/
-  searchCountry(country: string) {
+
+  searchCountry(country: string): void {
     this.subscription.add(
       this.weatherService.getCountryData(country).subscribe({
         next: (res) => {
           this.countryData = res;
           this.selectedWeather = res.weather;
-          console.log(this.countryData);
         },
         error: (error) => {
-          console.error('Error', error);
-          this.errorMessage = error.error?.message;
+          this.errorMessage = error.error?.message || 'Error al obtener datos del país';
         },
       })
     );
   }
 
-  searchWeather(zone: string) {
+  searchWeather(zone: string): void {
     this.subscription.add(
       this.weatherService.getWeather(zone).subscribe({
         next: (res) => {
           this.selectedWeather = res;
-          console.log(this.selectedWeather);
         },
         error: (error) => {
-          console.log(error);
-          this.errorMessage = error.error?.message;
+          this.errorMessage = error.error?.message || 'Error al obtener el clima';
         }
       })
     );
-  }
-
-  ngOnDestroy(): void {
-    this.subscription.unsubscribe();
   }
 }

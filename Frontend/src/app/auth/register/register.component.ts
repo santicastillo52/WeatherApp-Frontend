@@ -1,9 +1,10 @@
-import { Component, inject, ViewChild } from '@angular/core';
-import { AuthService } from '../../core/services/auth-service';
+import { Component, inject } from '@angular/core';
 import { FormsModule, NgForm } from '@angular/forms';
-import { RegisterUser } from '../../models/user.model';
-import { CommonModule } from '@angular/common';
 import { Router, RouterModule } from '@angular/router';
+import { CommonModule } from '@angular/common';
+
+import { AuthService } from '../../core/services/auth-service';
+import { RegisterUser } from '../../models/user.model';
 
 @Component({
   selector: 'app-register',
@@ -13,8 +14,9 @@ import { Router, RouterModule } from '@angular/router';
   styleUrl: './register.component.scss',
 })
 export class RegisterComponent {
-  private authService = inject(AuthService);
-  private router = inject(Router);
+  private readonly authService = inject(AuthService);
+  private readonly router = inject(Router);
+  
   errorMessage: string | null = null;
   isSubmitting: boolean = false;
   messageButton: string = 'Registrarse';
@@ -26,33 +28,35 @@ export class RegisterComponent {
     email: '',
   } as RegisterUser;
 
-  submitRegister() {
+  submitRegister(): void {
     if (this.isSubmitting) return;
-    this.messageButton = 'Registrando...';
-    this.isSubmitting = true;
+    
+    this.setLoadingState(true);
+    this.errorMessage = null;
+
     const user = {
       name: this.formModel.name,
       password: this.formModel.password,
       email: this.formModel.email,
     };
+
     this.authService.register(user).subscribe({
-      next: (res) => {
+      next: () => {
         this.router.navigate(['dashboard/weather']);
       },
       error: (error) => {
-        console.log(error);
-        this.errorMessage = error.error?.message;
-        this.isSubmitting = false;
-        this.messageButton = 'Registrarse';
-      },
-      complete: () => {
-        this.isSubmitting = false;
-        this.messageButton = 'Registrarse';
-      },
+        this.errorMessage = error.error?.message || 'Error al registrarse';
+        this.setLoadingState(false);
+      }
     });
   }
 
   passwordsDoNotMatch(): boolean {
     return this.formModel.password !== this.formModel.repeatPassword;
+  }
+
+  private setLoadingState(loading: boolean): void {
+    this.isSubmitting = loading;
+    this.messageButton = loading ? 'Registrando...' : 'Registrarse';
   }
 }

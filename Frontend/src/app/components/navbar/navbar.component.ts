@@ -1,7 +1,8 @@
 import { Component, inject } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
-import { AuthService } from '../../core/services/auth-service';
 import { CommonModule } from '@angular/common';
+
+import { AuthService } from '../../core/services/auth-service';
 
 @Component({
   selector: 'app-navbar',
@@ -12,19 +13,17 @@ import { CommonModule } from '@angular/common';
 })
 export class NavbarComponent {
   isOpen = true;
-  private authService = inject(AuthService);
-  private router = inject(Router);
   isCollapsed = false;
+  
+  private readonly authService = inject(AuthService);
+  private readonly router = inject(Router);
 
-  toggleMenu() {
+  toggleMenu(): void {
     this.isOpen = !this.isOpen;
   }
 
-
-
-  logout() {
+  logout(): void {
     this.authService.logout();
-    this.router.navigate(['login']);
-    console.log('sesion cerrada');
+    this.router.navigate(['/login']);
   }
 }

@@ -18,26 +18,24 @@ export const routes: Routes = [
       import('./dashboard/dashboard.component').then(
         (c) => c.DashboardComponent,
       ),
+    canActivate: [authGuard],
     children: [
       {
         path: 'weather',
         loadComponent: () =>
           import('./components/weather/weather.component').then(
             (c) => c.WeatherComponent
-          ),canActivate: [authGuard]
+          ),
       },
       {
         path: 'users',
         loadComponent: () =>
           import('./components/users/users.component').then(
             (c) => c.UsersComponent
-          ), canActivate: [authGuard]
+          ),
       },
     ],
-    canActivate: [authGuard]
   },
-
-  { path: '**', redirectTo: 'login' },
-
-  { path: '', redirectTo: 'login', pathMatch: 'full' },
+  { path: '', redirectTo: '/login', pathMatch: 'full' },
+  { path: '**', redirectTo: '/login' },
 ];

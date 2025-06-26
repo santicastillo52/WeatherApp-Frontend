@@ -1,27 +1,46 @@
-# Frontend
+# Ally Frontend
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.2.8.
+Aplicación frontend desarrollada en Angular para gestión de usuarios, clima y tareas.
 
-## Development server
+## Características
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+- Autenticación de usuarios
+- Dashboard con múltiples módulos
+- Gestión de usuarios
+- Información del clima
+- Interfaz responsive
 
-## Code scaffolding
+## Instalación
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+1. Clona el repositorio
+2. Instala las dependencias:
+```bash
+npm install
+```
 
-## Build
+3. Ejecuta la aplicación:
+```bash
+ng serve
+```
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+4. Abre tu navegador en `http://localhost:4200`
 
-## Running unit tests
+## Acceso a la Aplicación
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+También puedes acceder a la aplicación directamente desde:
+- **Vercel**: https://test-ally-frontend.vercel.app
 
-## Running end-to-end tests
+## Estructura del Proyecto
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+- `src/app/auth/` - Componentes de autenticación
+- `src/app/components/` - Componentes reutilizables
+- `src/app/core/` - Servicios, guards e interceptores
+- `src/app/dashboard/` - Componente principal del dashboard
+- `src/app/models/` - Interfaces y tipos TypeScript
 
-## Further help
+## Tecnologías
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+- Angular 17
+- TypeScript
+- RxJS
+- SCSS

@@ -1,10 +1,10 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { FormsModule, NgForm } from '@angular/forms';
+import { Router, RouterModule } from '@angular/router';
 
 import { AuthService } from '../../core/services/auth-service';
 import { LoginUser } from '../../models/user.model';
-import { Router, RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -14,8 +14,9 @@ import { Router, RouterModule } from '@angular/router';
   styleUrl: './login.component.scss',
 })
 export class LoginComponent {
-  private authService = inject(AuthService);
-  private router = inject(Router);
+  private readonly authService = inject(AuthService);
+  private readonly router = inject(Router);
+  
   errorMessage: string | null = null;
   isSubmitting: boolean = false;
   messageButton: string = 'Iniciar sesión';
@@ -25,24 +26,25 @@ export class LoginComponent {
     password: '',
   } as LoginUser;
 
-  submitForm() {
-    if(this.isSubmitting) return;
-    this.messageButton = 'Iniciando sesión...';
-    this.isSubmitting = true;
+  submitForm(): void {
+    if (this.isSubmitting) return;
+    
+    this.setLoadingState(true);
+    this.errorMessage = null;
+
     this.authService.login(this.formModel).subscribe({
-      next: (res) => {
+      next: () => {
         this.router.navigate(['dashboard/weather']);
       },
       error: (error) => {
-        console.log('ha ocurrido un error', error);
-        this.errorMessage = error.error?.message;
-        this.isSubmitting = false;
-        this.messageButton = 'Iniciar sesión';
-      },
-      complete:()=>{
-        this.isSubmitting = false;
-        this.messageButton = 'Iniciar sesión';
+        this.errorMessage = error.error?.message || 'Error al iniciar sesión';
+        this.setLoadingState(false);
       }
     });
+  }
+
+  private setLoadingState(loading: boolean): void {
+    this.isSubmitting = loading;
+    this.messageButton = loading ? 'Iniciando sesión...' : 'Iniciar sesión';
   }
 }
