@@ -1,4 +1,4 @@
-# Ally Frontend
+# Weather app 
 
 Aplicación frontend desarrollada en Angular para gestión de usuarios, clima y tareas.
 
